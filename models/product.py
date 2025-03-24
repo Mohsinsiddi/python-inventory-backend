@@ -24,5 +24,4 @@ class Product:
         return self.__category_id
 
     def __str__(self):
-        return f'{self.__name} (${self.__price}), Qty: {self.__quantity}'
-
+        return f"{self.__name} (${self.__price}), Qty: {self.__quantity}"
