@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %}
+<h1>Categories</h1>
+
+<!-- Form to Add New Category -->
+<form method="POST" action="{{ url_for('add_category') }}" class="mb-4">
+  <label for="name">Category Name:</label>
+  <input type="text" name="name" required />
+
+  <label for="description">Description:</label>
+  <textarea name="description" required></textarea>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    style="padding: 6px 12px; border-radius: 4px"
+  >
+    Add Category
+  </button>
+</form>
+
+<!-- List of Categories -->
+<h2>Category List</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for category in categories %}
+    <tr>
+      <td>{{ category.id }}</td>
+      <td>{{ category.name }}</td>
+      <td>{{ category.description }}</td>
+      <td>
+        <!-- <a href="{{ url_for('update_category', category_id=category.id) }}" 
+                   class="btn btn-primary btn-sm"
+                   style="padding: 6px 12px; border-radius: 4px; text-decoration: none; color: white; background-color: #007bff; border: 1px solid #007bff;">
+                    Edit
+                </a>
+                <form method="POST" action="{{ url_for('delete_category', category_id=category.id) }}">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Are you sure you want to delete this category?')"
+                            style="padding: 6px 12px; border-radius: 4px; color: white; background-color: #dc3545; border: 1px solid #dc3545;">
+                        Delete
+                    </button>
+                </form> -->
+        <form action="" style="display: flex; flex-direction: row; justify-content: space-evenly;"> 
+          <div style="
+          padding: 6px 12px;
+          border-radius: 4px;
+          text-decoration: none;
+          color: white;
+          background-color: #007bff;
+          border: 1px solid #007bff;
+        ">
+            <a
+              href="{{ url_for('update_category', category_id=category.id) }}"
+              class="btn btn-primary btn-sm"
+              style="text-decoration: none; color: white;"
+            >
+              Edit
+            </a>
+          </div>
+          <div style="
+          padding: 6px 12px;
+          border-radius: 4px;
+          text-decoration: none;
+          color: white;
+          background-color: #c41010;
+          border: 1px solid #c41010;
+        ">
+            <a
+              href="{{ url_for('delete_category', category_id=category.id) }}"
+              class="btn btn-primary btn-sm"
+              style="text-decoration: none; color: white"
+              
+            >
+              Delete
+            </a>
+          </div>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

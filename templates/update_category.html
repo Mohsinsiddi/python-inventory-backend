@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Update Category</h1>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<!-- Form to update category -->
+<form method="POST" action="{{ url_for('update_category', category_id=category.id) }}">
+    <label for="name">Category Name:</label>
+    <input type="text" name="name" value="{{ category.name }}" required>
+
+    <label for="description">Description:</label>
+    <textarea name="description" required>{{ category.description }}</textarea>
+
+    <button type="submit" class="btn btn-primary" style="padding: 6px 12px; border-radius: 4px;">Update Category</button>
+</form>
+
+<a href="{{ url_for('add_category') }}" class="btn btn-secondary mt-3">Back to Category List</a>
+{% endblock %}

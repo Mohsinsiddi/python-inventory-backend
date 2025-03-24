@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Update Product{% endblock %}
+
+{% block content %}
+<h1>Update Product</h1>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<form method="POST" action="{{ url_for('update_product', product_id=product.product_id) }}">
+    <label>Product ID:</label>
+    <input type="text" name="product_id" value="{{ product.product_id }}" readonly required>
+
+    <label>Name:</label>
+    <input type="text" name="name" value="{{ product.name }}" required>
+
+    <label>Price:</label>
+    <input type="number" name="price" step="0.01" value="{{ product.price }}" required>
+
+    <label>Quantity:</label>
+    <input type="number" name="quantity" value="{{ product.quantity }}" required>
+
+    <label>Category:</label>
+    <select name="category" required>
+        {% for category in categories %}
+        <option value="{{ category.id }}" {% if category.id == product.category_id %} selected {% endif %}>
+            {{ category.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="btn btn-success">Update Product</button>
+</form>
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to Product List</a>
+{% endblock %}
