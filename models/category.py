@@ -12,4 +12,4 @@ class Category:
         return self.__description
 
     def __str__(self):
-        return f'{self.__name}: {self.__description}'
+        return f"{self.__name}: {self.__description}"
